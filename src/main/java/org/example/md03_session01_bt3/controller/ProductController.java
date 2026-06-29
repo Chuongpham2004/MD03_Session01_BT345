@@ -4,9 +4,7 @@ import org.example.md03_session01_bt3.model.Product;
 import org.example.md03_session01_bt3.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +20,20 @@ public class ProductController {
     @GetMapping("/products")
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
+    }
+
+    @PostMapping("/products")
+    public void addProduct(@RequestBody Product product) {
+        productService.addProduct(product);
+    }
+
+    @PutMapping("/products/{id}")
+    public boolean updateProduct(@PathVariable int id, @RequestBody Product updatedProduct) {
+        return productService.updateProduct(id, updatedProduct);
+    }
+
+    @DeleteMapping("/products/{id}")
+    public boolean deleteProduct(@PathVariable int id) {
+        return productService.deleteProduct(id);
     }
 }
